@@ -32,6 +32,16 @@
   color: #333;
 }
 
+.hero-slide {
+  display: none;
+}
+
+.hero-slide.active {
+  display: block;
+}
+
+
+
 @media (max-width: 767px) {
   .header-content {
     flex-direction: column;
