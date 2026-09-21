@@ -23,7 +23,7 @@ function DoctorCard({ doctor }) {
             </p>
           </div>
 
-          <ul className="social-icon">
+          {/* <ul className="social-icon">
             {doctor.socials.map((social, index) => (
               <li key={index}>
                 <a
@@ -32,7 +32,7 @@ function DoctorCard({ doctor }) {
                 ></a>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>

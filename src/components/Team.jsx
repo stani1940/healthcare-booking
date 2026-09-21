@@ -1,14 +1,27 @@
 import DoctorCard from "./DoctorCard";
-import { useEffect} from "react";
-import { supabase } from "../lib/supabase";
-function team() {
+import { useEffect , useState} from "react";
+function Team() {
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+
   useEffect(() => {
-    supabase
-      .from("doctors")
-      .select("*")
-      .then   ((result) => {
-        console.log(result.data);
-        
+    const url = `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/doctors?select=*`;
+    fetch(url, {
+      headers: {
+        "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setDoctors(data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
     }, []);
 
@@ -28,13 +41,15 @@ function team() {
           </div>
 
           <div className="clearfix"></div>
+          {loading && <p>Loading doctors...</p>}
+          {error && <p>Error: {error}</p>}
 
-         {/* {doctors.map((doctor) => (
+          {!loading && !error && doctors.map((doctor) => (
             <DoctorCard 
-            key={doctor.name} 
+            key={doctor.id} 
             doctor={doctor} 
             />
-          ))} */}
+          ))} 
 
         </div>
       </div>
@@ -43,4 +58,4 @@ function team() {
              
 
 }
-export default team;
+export default Team;
