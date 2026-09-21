@@ -23,16 +23,18 @@ function DoctorCard({ doctor }) {
             </p>
           </div>
 
-          {/* <ul className="social-icon">
-            {doctor.socials.map((social, index) => (
+           <ul className="social-icon">
+            {(doctor.socials || []).map((social, index) => (
               <li key={index}>
                 <a
-                  href="#"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`fa ${social.icon}`}
                 ></a>
               </li>
             ))}
-          </ul> */}
+          </ul>
         </div>
       </div>
     </div>
