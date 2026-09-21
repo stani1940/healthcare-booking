@@ -1,44 +1,18 @@
 import DoctorCard from "./DoctorCard";
+import { useEffect} from "react";
+import { supabase } from "../lib/supabase";
 function team() {
-   const doctors = [
-    {
-      name: "Nate Baston",
-      specialty: "General Principal",
-      phone: "010-020-0120",
-      email: "general@company.com",
-      image: "/images/team-image1.jpg",
-      delay: "0.2s",
-      socials: [
-        { icon: "fa-linkedin-square" },
-        { icon: "fa-envelope-o" },
-      ],
-    },
-    {
-      name: "Jason Stewart",
-      specialty: "Pregnancy",
-      phone: "010-070-0170",
-      email: "pregnancy@company.com",
-      image: "/images/team-image2.jpg",
-      delay: "0.4s",
-      socials: [
-        { icon: "fa-facebook-square" },
-        { icon: "fa-envelope-o" },
-        { icon: "fa-flickr" },
-      ],
-    },
-    {
-      name: "Miasha Nakahara",
-      specialty: "Cardiology",
-      phone: "010-040-0140",
-      email: "cardio@company.com",
-      image: "/images/team-image3.jpg",
-      delay: "0.6s",
-      socials: [
-        { icon: "fa-twitter" },
-        { icon: "fa-envelope-o" },
-      ],
-    },
-  ];
+  useEffect(() => {
+    supabase
+      .from("doctors")
+      .select("*")
+      .then   ((result) => {
+        console.log(result.data);
+        
+      });
+    }, []);
+
+
 
     return (
          <section id="team" data-stellar-background-ratio="1">
@@ -55,12 +29,12 @@ function team() {
 
           <div className="clearfix"></div>
 
-         {doctors.map((doctor) => (
+         {/* {doctors.map((doctor) => (
             <DoctorCard 
             key={doctor.name} 
             doctor={doctor} 
             />
-          ))}
+          ))} */}
 
         </div>
       </div>
