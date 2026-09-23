@@ -20,6 +20,39 @@ function AddDoctor({ onClose }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/doctors`, {
+    method: "POST",
+    headers: {
+      apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.message || "Failed to add doctor");
+        });
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Doctor added:", data);
+
+      setFormData({
+        name: "",
+        specialty: "",
+        phone: "",
+        email: "",
+        image: "",
+      });
+    })
+    .catch((error) => {
+      console.error("Error adding doctor:", error);
+    });
   }
 
   
