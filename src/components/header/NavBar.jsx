@@ -1,4 +1,4 @@
-function NavBar() {
+function NavBar({onAddDoctor}) {
     return (
          <section
             className="navbar navbar-default navbar-static-top"
@@ -60,6 +60,15 @@ function NavBar() {
               <a href="#appointment">
                 Make an appointment
               </a>
+            </li>
+            <li className="appointment-btn">
+              <button
+                type="button"
+                onClick={onAddDoctor}
+                className="section-btn btn btn-default"
+              >
+              Add Doctor
+              </button>
             </li>
           </ul>
         </div>

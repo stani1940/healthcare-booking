@@ -8,13 +8,21 @@ import News from './components/News'
 import Appointment from './components/Appointment'
 import GoogleMap from './components/GoogleMap'
 import Footer from './components/Footer'
+import AddDoctor from './components/AddDoctor'
 
 function App() {
- 
+  const [showAddDoctor, setShowAddDoctor] = useState(false);
+  function handleAddDoctor() {
+    setShowAddDoctor(true);
+  }
+  function handleCloseAddDoctor() {   
+    setShowAddDoctor(false);
+  }
 
   return (
     <>
-      <Header />
+      <Header onAddDoctor={handleAddDoctor} />
+      {showAddDoctor && <AddDoctor onClose={handleCloseAddDoctor} />}
       <About />
       <Team />
       <News />
