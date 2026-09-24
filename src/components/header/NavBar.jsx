@@ -1,4 +1,5 @@
-function NavBar({onAddDoctor}) {
+import { NavLink } from "react-router-dom";
+function NavBar() {
     return (
          <section
             className="navbar navbar-default navbar-static-top"
@@ -27,48 +28,44 @@ function NavBar({onAddDoctor}) {
         <div className="collapse navbar-collapse">
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="#top" className="smoothScroll">
-                Home
-              </a>
+               <NavLink to="/#top" className="smoothScroll">
+               Home
+               </NavLink>
             </li>
 
             <li>
-              <a href="#about" className="smoothScroll">
+              <a href= "/#about" className="smoothScroll">
                 About Us
               </a>
             </li>
 
             <li>
-              <a href="#team" className="smoothScroll">
+              <a href="/#team" className="smoothScroll">
                 Doctors
               </a>
             </li>
 
             <li>
-              <a href="#news" className="smoothScroll">
+              <a href="/#news" className="smoothScroll">
                 News
               </a>
             </li>
 
             <li>
-              <a href="#google-map" className="smoothScroll">
+              <a href="/#google-map">
                 Contact
               </a>
             </li>
 
             <li className="appointment-btn">
-              <a href="#appointment">
+              <NavLink to="/appointment">
                 Make an appointment
-              </a>
+              </NavLink>
             </li>
             <li className="appointment-btn">
-              <button
-                type="button"
-                onClick={onAddDoctor}
-                className="section-btn btn btn-default"
-              >
-              Add Doctor
-              </button>
+               <NavLink to="/add-doctor">
+                Add Doctor
+              </NavLink>
             </li>
           </ul>
         </div>

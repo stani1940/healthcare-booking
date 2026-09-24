@@ -1,14 +1,10 @@
 import { useState } from 'react'
 
 import './App.css'
-import Header from './components/header/Header'
-import About from './components/About'
-import Team from './components/Team'
-import News from './components/News'
 import Appointment from './components/Appointment'
-import GoogleMap from './components/GoogleMap'
-import Footer from './components/Footer'
 import AddDoctor from './components/AddDoctor'
+import Home from './components/Home'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [showAddDoctor, setShowAddDoctor] = useState(false);
@@ -21,14 +17,14 @@ function App() {
 
   return (
     <>
-      <Header onAddDoctor={handleAddDoctor} />
-      {showAddDoctor && <AddDoctor onClose={handleCloseAddDoctor} />}
-      <About />
-      <Team />
-      <News />
-      <Appointment />
-      <GoogleMap />
-      <Footer />
+
+    <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/add-doctor" element={<AddDoctor />} />
+          </Routes>
+    </BrowserRouter>
 
 
       
