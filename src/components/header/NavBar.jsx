@@ -62,6 +62,18 @@ function NavBar() {
                 Make an appointment
               </NavLink>
             </li>
+
+            <li>
+              <NavLink to="/login">
+                Login
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/register">
+                Register
+              </NavLink>
+            </li>
             <li className="appointment-btn">
                <NavLink to="/add-doctor">
                 Add Doctor
