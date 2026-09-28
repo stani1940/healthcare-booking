@@ -49,7 +49,7 @@ function login() {
     .then((data) => {
       console.log("Logged in user:", data);
         localStorage.setItem("access_token", data.access_token);
-        navigate("/");
+        navigate("/dashboard");
     })
     .catch((error) => {
       console.error("Login error:", error);
