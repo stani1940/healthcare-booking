@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function login() {
     const [formData, setFormData] = useState({
         email: "",  
         password: "",
     });
+
+    const navigate = useNavigate();
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -46,6 +49,7 @@ function login() {
     .then((data) => {
       console.log("Logged in user:", data);
         localStorage.setItem("access_token", data.access_token);
+        navigate("/");
     })
     .catch((error) => {
       console.error("Login error:", error);

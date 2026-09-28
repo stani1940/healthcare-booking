@@ -1,6 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 function NavBar() {
-    return (
+  const isLoggedIn = localStorage.getItem("access_token");
+  const navigate = useNavigate();
+  function handleLogout() {
+  localStorage.removeItem("access_token");
+  navigate("/");
+  }
+  return (
          <section
             className="navbar navbar-default navbar-static-top"
             role="navigation"
@@ -62,23 +69,40 @@ function NavBar() {
                 Make an appointment
               </NavLink>
             </li>
+          {!isLoggedIn && (
+            <>
+              <li>
+                <NavLink to="/login">
+                  Login
+                </NavLink>
+              </li>
 
-            <li>
-              <NavLink to="/login">
-                Login
-              </NavLink>
-            </li>
+              <li>
+                <NavLink to="/register">
+                  Register
+                </NavLink>
+              </li>
+            </>
+          )}
 
+          {isLoggedIn && (
             <li>
-              <NavLink to="/register">
-                Register
-              </NavLink>
+              <button 
+              type="button"
+              className="btn btn-success"
+               onClick={handleLogout}
+               >
+                Logout
+              </button>
             </li>
+          )}
+
             <li className="appointment-btn">
                <NavLink to="/add-doctor">
                 Add Doctor
               </NavLink>
             </li>
+           
           </ul>
         </div>
 
