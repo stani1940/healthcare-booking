@@ -12,15 +12,13 @@ function About() {
 
               <div className="wow fadeInUp" data-wow-delay="0.8s">
                 <p>
-                  Aenean luctus lobortis tellus, vel ornare enim molestie
-                  condimentum. Curabitur lacinia nisi vitae velit volutpat
-                  venenatis.
+                 
                 </p>
 
                 <p>
-                  Sed a dignissim lacus. Quisque fermentum est non orci
-                  commodo, a luctus urna mattis. Ut placerat, diam a tempus
-                  vehicula.
+                  Your health deserves personal attention, and in Vratsa, you'll find it here.
+                  Our caring team combines modern care with a warm, friendly approach, right in the heart of Northwestern Bulgaria.
+                  Close to home, close to you, we're here to help you feel your best every day.
                 </p>
               </div>
 
