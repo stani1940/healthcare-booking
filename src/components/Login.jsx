@@ -62,9 +62,9 @@ function login() {
         <div className="row">
           <div className="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <form
-              id="login-form"
-              role="form"
-              onSubmit={handleSubmit}
+                id="login-form"
+                role="form"
+                onSubmit={handleSubmit}
             >
               <div className="section-title">
                 <h2>Login</h2>
@@ -97,9 +97,9 @@ function login() {
               </div>
 
               <button
-                type="submit"
-                className="form-control"
-                id="cf-submit"
+                    type="submit"
+                    className="form-control"
+                    id="cf-submit"
               >
                 Login
               </button>
