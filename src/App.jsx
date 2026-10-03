@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Dashboard from './components/Dashboard'
+import UserAppointments from './components/UserAppointments'  
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/add-doctor" element={<AddDoctor />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/my-appointments" element={<UserAppointments />} />  
           </Routes>
     </BrowserRouter>
 
