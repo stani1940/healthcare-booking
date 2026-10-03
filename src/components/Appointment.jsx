@@ -63,6 +63,7 @@ function Appointment() {
 
     setLoadingSubmit(true);
     
+    
     fetch(`${import.meta.env.VITE_SUPABASE_URL}/auth/v1/user`, {
       method: "GET",
       headers: {
@@ -88,12 +89,12 @@ function Appointment() {
           notes: formData.message,   
         };
 
-         return fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/appointments?select=id,user_id`,
+         return fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/appointments`,
           {
             method: "POST",
             headers: {
               apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-              Authorisation: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${accessToken}`,
               "Content-Type": "application/json" ,
               Prefer: "return=minimal",
             },
@@ -113,6 +114,7 @@ function Appointment() {
 
         //return response.json();
       })
+      
       .then((data) => {
 
         setSuccess("Appointment created successfully.");
