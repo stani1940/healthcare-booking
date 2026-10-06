@@ -5,6 +5,8 @@ function UserAppointments() {
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
     useEffect(() => {
         const accessToken = localStorage.getItem("access_token");
 
@@ -43,6 +45,53 @@ function UserAppointments() {
         setLoading(false);
     });
 }, [navigate]);
+
+
+function handleDelete(appointmentId) {
+  const confimed = window.confirm(
+    "Are you sure you want to delete this appointment?"
+  );
+  
+  if (!confimed) {
+    return;
+  }
+  
+  setError("");
+  setSuccess("");
+
+  const accessToken = localStorage.getItem("access_token");
+
+  fetch(
+    `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/appointments?id=eq.${appointmentId}`,
+    {
+      method: "DELETE",
+      headers: {
+        apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  )
+    .then ((response) => {
+      const body =  response.text();
+      if (!response.ok) {
+        throw new Error(body || "Could not delete appointment");
+      }
+      return body;
+    })
+    .then(() => {
+      setAppointments((prevAppointments) =>
+        prevAppointments.filter(
+          (appointment) => appointment.id !== appointmentId
+        )
+      );
+      setSuccess("Appointment deleted successfully.");
+    })
+    .catch((error) => {
+      console.error("Error deleting appointment:", error);
+      setError("Could not delete appointment.");
+    });
+}
+
 
 return (
     <section className="user-appointments">
@@ -98,6 +147,28 @@ return (
                       {appointment.notes}
                     </p>
                   )}
+
+                    <div className="appointment-actions">
+                        <button
+                          type="button"
+                          className="section-btn btn btn-default"
+                          onClick={() =>
+                            handleEdit(appointment)
+                          }
+                        >
+                          Edit
+                        </button>
+
+                        <button
+                          type="button"
+                          className="section-btn btn btn-default"
+                          onClick={() =>
+                            handleDelete(appointment.id)
+                          }
+                        >
+                          Delete
+                        </button>
+                      </div>
                 </div>
               </div>
             ))}

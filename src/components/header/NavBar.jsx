@@ -86,6 +86,13 @@ function NavBar() {
           )}
 
           {isLoggedIn && (
+            <>
+              <li>
+                <NavLink to="/my-appointments">
+                    My Appointments
+                </NavLink>
+              </li>
+
             <li>
               <button 
               type="button"
@@ -95,6 +102,7 @@ function NavBar() {
                 Logout
               </button>
             </li>
+            </>
           )}
 
             <li className="appointment-btn">
