@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 function UserAppointments() {
     const navigate = useNavigate();
     const [appointments, setAppointments] = useState([]);
@@ -135,6 +138,34 @@ function handleEdit(appointment) {
     setEditData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  }
+
+  function handleDateChange(date) {
+    const formattedDate = date
+      ? [
+          date.getFullYear(),
+          String(date.getMonth() + 1).padStart(2, "0"),
+          String(date.getDate()).padStart(2, "0"),
+        ].join("-")
+      : "";
+
+    setEditData((prevData) => ({
+      ...prevData,
+      date: formattedDate,
+    }));
+  }
+
+  function handleTimeChange(date) {
+    const formattedTime = date
+      ? `${String(date.getHours()).padStart(2, "0")}:${String(
+          date.getMinutes()
+        ).padStart(2, "0")}`
+      : "";
+
+    setEditData((prevData) => ({
+      ...prevData,
+      time: formattedTime,
     }));
   }
 
@@ -300,13 +331,16 @@ return (
                           Date
                         </label>
 
-                        <input
-                          type="date"
+                        <DatePicker
                           id={`date-${appointment.id}`}
-                          name="date"
                           className="form-control"
-                          value={editData.date}
-                          onChange={handleEditChange}
+                          dateFormat="yyyy-MM-dd"
+                          selected={
+                            editData.date
+                              ? new Date(`${editData.date}T00:00:00`)
+                              : null
+                          }
+                          onChange={handleDateChange}
                         />
                       </div>
 
@@ -315,13 +349,20 @@ return (
                           Time
                         </label>
 
-                        <input
-                          type="time"
+                        <DatePicker
                           id={`time-${appointment.id}`}
-                          name="time"
                           className="form-control"
-                          value={editData.time}
-                          onChange={handleEditChange}
+                          selected={
+                            editData.time
+                              ? new Date(`2000-01-01T${editData.time}:00`)
+                              : null
+                          }
+                          onChange={handleTimeChange}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={30}
+                          timeCaption="Time"
+                          dateFormat="HH:mm"
                         />
                       </div>
 
