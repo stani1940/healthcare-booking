@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function register() {
     const [formData, setFormData] = useState({
         username: "",
@@ -7,6 +8,8 @@ function register() {
         password: "",
         confirmPassword: "",
     });
+
+    const navigate = useNavigate();
     
     function handleChange(event) {
         const { name, value } = event.target;
@@ -51,13 +54,13 @@ function register() {
     })  
             .then((data) => {
                 console.log("Registration successful:", data);
-                // Handle successful registration (e.g., redirect to login)
-              
+                alert("Registration successful! Please log in.");
+                navigate("/login");
 
             })
             .catch((error) => {
                 console.error("Registration error:", error);
-                
+                alert("Registration failed. Please try again.");
             });
     }
 
