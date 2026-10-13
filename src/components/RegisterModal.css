@@ -1,0 +1,82 @@
+.register-modal {
+  overflow-y: auto;
+}
+
+.register-modal #register {
+  padding: 0;
+}
+
+.register-modal #register .container,
+.register-modal #register .row {
+  width: 100%;
+  margin: 0;
+}
+
+.register-modal #register .col-md-6 {
+  float: none;
+  width: min(100%, 440px);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.register-modal #register .section-title {
+  text-align: center;
+}
+
+.register-modal .modal-dialog {
+  width: min(100% - 24px, 520px);
+}
+
+.register-modal .modal-header {
+  min-height: 0;
+  padding: 10px 15px 0;
+  border-bottom: 0;
+}
+
+.register-modal .modal-body {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-top: 0;
+}
+
+.register-modal #register label {
+  color: #393939;
+  font-weight: 500;
+}
+
+.register-modal #register .form-control {
+  background: #f9f9f9;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 15px;
+  transition: all ease-in-out 0.4s;
+}
+
+.register-modal #register input {
+  height: 45px;
+}
+
+.register-modal #register button#cf-submit {
+  height: 55px;
+  background: #a5c422;
+  color: #fff;
+  font-weight: 600;
+}
+
+.register-modal #register button#cf-submit:hover {
+  background: #393939;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .register-modal .modal-dialog {
+    margin: 12px auto;
+  }
+
+  .register-modal .modal-body {
+    max-height: calc(100vh - 60px);
+  }
+}

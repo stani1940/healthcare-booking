@@ -5,7 +5,6 @@ import Appointment from './components/Appointment'
 import AddDoctor from './components/AddDoctor'
 import Home from './components/Home'
 import Login from './components/Login'
-import Register from './components/Register'
 import Dashboard from './components/Dashboard'
 import UserAppointments from './components/UserAppointments'  
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -27,7 +26,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Home showRegister />} />
             <Route path="/add-doctor" element={<AddDoctor />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/my-appointments" element={<UserAppointments />} />  

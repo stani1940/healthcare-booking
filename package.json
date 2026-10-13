@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
+    "bootstrap": "^3.4.1",
+    "jquery": "^3.7.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router": "^8.4.0",

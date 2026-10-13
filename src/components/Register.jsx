@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-function register() {
+function Register() {
     const [formData, setFormData] = useState({
         username: "",
         name: "",
@@ -75,7 +75,7 @@ function register() {
               onSubmit={handleSubmit}
             >
               <div className="section-title">
-                <h2>Register</h2>
+                <h2 id="register-modal-title">Register</h2>
               </div>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
@@ -159,4 +159,4 @@ function register() {
     </section>
   );
 }
- export default register;
+export default Register;
