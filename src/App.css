@@ -182,3 +182,48 @@
     border-right-color: var(--border);
   }
 }
+
+.user-appointment-edit label {
+  color: #393939;
+  font-weight: 500;
+}
+
+.user-appointment-edit .form-control {
+  width: 100%;
+  background: #f9f9f9;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 15px;
+  transition: all ease-in-out 0.4s;
+}
+
+.user-appointment-edit input,
+.user-appointment-edit select {
+  height: 45px;
+}
+
+.user-appointment-edit textarea {
+  min-height: 100px;
+}
+
+.user-appointment-edit .user-appointment-save {
+  height: 55px;
+  background: #a5c422;
+  color: #fff;
+  font-weight: 600;
+}
+
+.user-appointment-edit .user-appointment-save:hover,
+.user-appointment-edit .user-appointment-save:focus {
+  background: #393939;
+  color: #fff;
+}
+
+.user-appointment-edit > .btn {
+  min-height: 45px;
+  margin-right: 10px;
+  border-radius: 3px;
+}

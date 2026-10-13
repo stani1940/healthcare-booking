@@ -301,7 +301,7 @@ return (
                 <div className="appointment-card">
 
                     {editingId === appointment.id ? (
-                  <>
+                  <div className="user-appointment-edit">
                       <h3>Edit Appointment</h3>
 
                       <div className="form-group">
@@ -383,7 +383,7 @@ return (
 
                       <button
                         type="button"
-                        className="section-btn btn btn-default"
+                        className="user-appointment-save form-control"
                         onClick={() =>
                           handleUpdate(appointment.id)
                         }
@@ -398,7 +398,7 @@ return (
                       >
                         Cancel
                       </button>
-                    </>
+                  </div>
                   ) : (
                     <>
                   <h3>
