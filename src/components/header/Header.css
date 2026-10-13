@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.navbar-default > .container {
+  width: 100%;
+}
+
 .header-content {
   display: flex;
   align-items: center;
@@ -40,8 +44,6 @@
   display: block;
 }
 
-
-
 @media (max-width: 767px) {
   .header-content {
     flex-direction: column;
@@ -52,4 +54,3 @@
 
 
 }
-
