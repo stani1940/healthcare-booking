@@ -1,5 +1,11 @@
 import {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 function Appointment() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,6 +57,21 @@ function Appointment() {
     }));
   }
 
+  function handleDateChange(date) {
+    const formattedDate = date
+      ? [
+          date.getFullYear(),
+          String(date.getMonth() + 1).padStart(2, "0"),
+          String(date.getDate()).padStart(2, "0"),
+        ].join("-")
+      : "";
+
+    setFormData((previousData) => ({
+      ...previousData,
+      date: formattedDate
+    }));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     setError("");
@@ -58,6 +79,8 @@ function Appointment() {
     const accessToken = localStorage.getItem("access_token");
     if (!accessToken) {
       setError("You must be logged in to make an appointment.");
+      setLoadingSubmit(false);
+      navigate("/login");
       return;
     }
 
@@ -115,7 +138,7 @@ function Appointment() {
         //return response.json();
       })
       
-      .then((data) => {
+      .then(() => {
 
         setSuccess("Appointment created successfully.");
 
@@ -128,6 +151,7 @@ function Appointment() {
           telephone: "",
           message: "",
         });
+        navigate("/my-appointments");
       })
       .catch((error) => {
         console.error("Appointment error:", error);
@@ -189,13 +213,16 @@ function Appointment() {
 
                 <div className="col-md-6 col-sm-6">
                   <label htmlFor="date">Select Date</label>
-                  <input
-                    type="date"
+                  <DatePicker
                     className="form-control"
                     id="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
+                    dateFormat="yyyy-MM-dd"
+                    selected={
+                      formData.date
+                        ? new Date(`${formData.date}T00:00:00`)
+                        : null
+                    }
+                    onChange={handleDateChange}
                   />
                 </div>
 
