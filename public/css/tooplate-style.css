@@ -193,6 +193,12 @@ http://www.tooplate.com/view/2098-health
     padding-bottom: 100px;
   }
 
+  #team > .container,
+  #news > .container,
+  #appointment > .container {
+    width: 100%;
+  }
+
   #news, #service {
     text-align: center;
   }
@@ -1054,4 +1060,3 @@ http://www.tooplate.com/view/2098-health
     }
 
   }
-
