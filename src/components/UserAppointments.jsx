@@ -119,15 +119,9 @@ function handleDelete(appointmentId) {
 function handleEdit(appointment) {
  setSuccess("");
  setError("");
-  console.log("APPOINTMENT DOCTOR:", appointment.doctor_id);
-  console.log("DOCTORS:", doctors);
-  console.log(
-    "DOCTOR IDS:",
-    doctors.map((doctor) => doctor.id)
-  );
  setEditingId(appointment.id);
  setEditData({
-   doctorId: String(appointment.doctors?.id),
+   doctorId: String(appointment.doctor_id ?? appointment.doctors?.id ?? ""),
    date: appointment.appointment_date,
     time: appointment.appointment_time 
     ? appointment.appointment_time.slice(0, 5)
@@ -206,26 +200,35 @@ function handleEdit(appointment) {
         body: JSON.stringify(updatedAppointment),
       }
     )
-      .then((response) => {
-       const body = response.text();
+      .then(async (response) => {
+       const body = await response.text();
         if (!response.ok) {
           throw new Error(body || "Could not update appointment");
         }
 
-        return body;
+       return body ? JSON.parse(body) : [];
       })
       .then((updatedData) => {
-        setAppointments((prevAppointments) =>
-          prevAppointments.map((appointment) =>
-            appointment.id === appointmentId 
-        ? {
-              ...appointment,
-              ...updatedData[0],
-              doctors: 
-                doctors.find((doc) => doc.id === updatedData[0].doctor_id) ||
-                appointment.doctors,
-            }
-        : appointment
+       const updatedAppointment = updatedData[0] ?? {
+         id: appointmentId,
+         doctor_id: editData.doctorId,
+         appointment_date: editData.date,
+         appointment_time: editData.time,
+         notes: editData.notes,
+       };
+       const selectedDoctor = doctors.find(
+         (doctor) => String(doctor.id) === String(updatedAppointment.doctor_id)
+       );
+
+       setAppointments((prevAppointments) =>
+         prevAppointments.map((appointment) =>
+           appointment.id === appointmentId
+       ? {
+             ...appointment,
+             ...updatedAppointment,
+             doctors: selectedDoctor || appointment.doctors,
+           }
+       : appointment
           )
         );
 
@@ -235,7 +238,7 @@ function handleEdit(appointment) {
       })
       .catch((error) => {
         console.error("Error updating appointment:", error);
-        setError("Could not update appointment.");
+        setError(error.message || "Could not update appointment.");
       });
     }
   
