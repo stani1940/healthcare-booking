@@ -52,6 +52,8 @@ function register() {
             .then((data) => {
                 console.log("Registration successful:", data);
                 // Handle successful registration (e.g., redirect to login)
+              
+
             })
             .catch((error) => {
                 console.error("Registration error:", error);
