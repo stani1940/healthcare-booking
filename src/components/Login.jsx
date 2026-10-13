@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-function login() {
+function Login() {
     const [formData, setFormData] = useState({
         email: "",  
         password: "",
@@ -67,7 +67,7 @@ function login() {
                 onSubmit={handleSubmit}
             >
               <div className="section-title">
-                <h2>Login</h2>
+                <h2 id="auth-modal-title">Login</h2>
               </div>
 
               <div className="form-group">
@@ -110,4 +110,4 @@ function login() {
     </section>
 );
 }
- export default login
+export default Login;

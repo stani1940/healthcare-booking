@@ -4,7 +4,6 @@ import './App.css'
 import Appointment from './components/Appointment'
 import AddDoctor from './components/AddDoctor'
 import Home from './components/Home'
-import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import UserAppointments from './components/UserAppointments'  
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -25,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/appointment" element={<Appointment />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Home showLogin />} />
             <Route path="/register" element={<Home showRegister />} />
             <Route path="/add-doctor" element={<AddDoctor />} />
             <Route path="/dashboard" element={<Dashboard />} />

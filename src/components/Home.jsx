@@ -10,32 +10,34 @@ import Appointment from "./Appointment";
 import GoogleMap from "./GoogleMap";
 import Footer from "./Footer";
 import Register from "./Register";
+import Login from "./Login";
 import "./RegisterModal.css";
 
-function Home({ showRegister = false }) {
+function Home({ showRegister = false, showLogin = false }) {
   const navigate = useNavigate();
-  const registerModalRef = useRef(null);
+  const authModalRef = useRef(null);
+  const showAuthModal = showRegister || showLogin;
 
   useEffect(() => {
-    if (!registerModalRef.current) {
+    if (!authModalRef.current) {
       return undefined;
     }
 
-    const $modal = $(registerModalRef.current);
+    const $modal = $(authModalRef.current);
     function handleModalHidden() {
-      if (showRegister) {
+      if (showAuthModal) {
         navigate("/");
       }
     }
 
     $modal.on("hidden.bs.modal", handleModalHidden);
-    $modal.modal({ show: showRegister, backdrop: true, keyboard: true });
+    $modal.modal({ show: showAuthModal, backdrop: true, keyboard: true });
 
     return () => {
       $modal.off("hidden.bs.modal", handleModalHidden);
       $modal.modal("hide");
     };
-  }, [navigate, showRegister]);
+  }, [navigate, showAuthModal]);
 
   return (
     <>
@@ -46,13 +48,13 @@ function Home({ showRegister = false }) {
       <Appointment />
       <GoogleMap />
       <Footer />
-      {showRegister && (
+      {showAuthModal && (
         <>
           <div
-            ref={registerModalRef}
-            className="modal fade register-modal"
+            ref={authModalRef}
+            className="modal fade auth-modal"
             role="dialog"
-            aria-labelledby="register-modal-title"
+            aria-labelledby="auth-modal-title"
             tabIndex="-1"
           >
             <div className="modal-dialog">
@@ -62,13 +64,13 @@ function Home({ showRegister = false }) {
                     type="button"
                     className="close"
                     data-dismiss="modal"
-                    aria-label="Close registration"
+                    aria-label={`Close ${showRegister ? "registration" : "login"}`}
                   >
                     &times;
                   </button>
                 </div>
                 <div className="modal-body">
-                  <Register />
+                  {showRegister ? <Register /> : <Login />}
                 </div>
               </div>
             </div>

@@ -75,7 +75,7 @@ function Register() {
               onSubmit={handleSubmit}
             >
               <div className="section-title">
-                <h2 id="register-modal-title">Register</h2>
+                <h2 id="auth-modal-title">Register</h2>
               </div>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>

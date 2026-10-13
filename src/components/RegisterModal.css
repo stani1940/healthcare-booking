@@ -1,50 +1,57 @@
-.register-modal {
+.auth-modal {
   overflow-y: auto;
 }
 
-.register-modal #register {
+.auth-modal #register,
+.auth-modal #login {
   padding: 0;
 }
 
-.register-modal #register .container,
-.register-modal #register .row {
+.auth-modal #register .container,
+.auth-modal #register .row,
+.auth-modal #login .container,
+.auth-modal #login .row {
   width: 100%;
   margin: 0;
 }
 
-.register-modal #register .col-md-6 {
+.auth-modal #register .col-md-6,
+.auth-modal #login .col-md-6 {
   float: none;
   width: min(100%, 440px);
   margin: 0 auto;
   padding: 0;
 }
 
-.register-modal #register .section-title {
+.auth-modal #register .section-title,
+.auth-modal #login .section-title {
   text-align: center;
 }
 
-.register-modal .modal-dialog {
+.auth-modal .modal-dialog {
   width: min(100% - 24px, 520px);
 }
 
-.register-modal .modal-header {
+.auth-modal .modal-header {
   min-height: 0;
   padding: 10px 15px 0;
   border-bottom: 0;
 }
 
-.register-modal .modal-body {
+.auth-modal .modal-body {
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   padding-top: 0;
 }
 
-.register-modal #register label {
+.auth-modal #register label,
+.auth-modal #login label {
   color: #393939;
   font-weight: 500;
 }
 
-.register-modal #register .form-control {
+.auth-modal #register .form-control,
+.auth-modal #login .form-control {
   background: #f9f9f9;
   border: none;
   border-radius: 3px;
@@ -55,28 +62,31 @@
   transition: all ease-in-out 0.4s;
 }
 
-.register-modal #register input {
+.auth-modal #register input,
+.auth-modal #login input {
   height: 45px;
 }
 
-.register-modal #register button#cf-submit {
+.auth-modal #register button#cf-submit,
+.auth-modal #login button#cf-submit {
   height: 55px;
   background: #a5c422;
   color: #fff;
   font-weight: 600;
 }
 
-.register-modal #register button#cf-submit:hover {
+.auth-modal #register button#cf-submit:hover,
+.auth-modal #login button#cf-submit:hover {
   background: #393939;
   color: #fff;
 }
 
 @media (max-width: 767px) {
-  .register-modal .modal-dialog {
+  .auth-modal .modal-dialog {
     margin: 12px auto;
   }
 
-  .register-modal .modal-body {
+  .auth-modal .modal-body {
     max-height: calc(100vh - 60px);
   }
 }
