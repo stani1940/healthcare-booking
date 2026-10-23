@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import './App.css'
 import Appointment from './components/Appointment'
 import AddDoctor from './components/AddDoctor'
@@ -7,21 +5,12 @@ import Home from './components/Home'
 import Dashboard from './components/Dashboard'
 import Team from './components/Team'
 import UserAppointments from './components/UserAppointments'  
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  const [showAddDoctor, setShowAddDoctor] = useState(false);
-  function handleAddDoctor() {
-    setShowAddDoctor(true);
-  }
-  function handleCloseAddDoctor() {   
-    setShowAddDoctor(false);
-  }
-
   return (
-    <>
-
-    <BrowserRouter>
+    <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/appointment" element={<Appointment />} />
@@ -33,11 +22,7 @@ function App() {
             <Route path="/dashboard/appointments" element={<UserAppointments />} />
             <Route path="/my-appointments" element={<UserAppointments />} />  
           </Routes>
-    </BrowserRouter>
-
-
-      
-    </>
+    </AuthProvider>
   )
 }
 

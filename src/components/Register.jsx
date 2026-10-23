@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 function Register() {
     const [formData, setFormData] = useState({
         username: "",
@@ -8,8 +10,11 @@ function Register() {
         password: "",
         confirmPassword: "",
     });
+    const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const navigate = useNavigate();
+    const { signUp } = useAuth();
     
     function handleChange(event) {
         const { name, value } = event.target;
@@ -19,49 +24,31 @@ function Register() {
         }));
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        setError("");
+
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
+            setError("Passwords do not match.");
             return;
         }
 
-        const registerData = {
-            email: formData.email,
-            password: formData.password,
-            data: {
-            username: formData.username,
-            name: formData.name,
-           }
-        };
-
-        fetch(`${import.meta.env.VITE_SUPABASE_URL}/auth/v1/signup`, {
-            method: "POST",
-            headers: {
-                "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(registerData),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then((error) => {
-                    throw new Error(error.msg || error.message || "Registration failed");
-                });
-      }
-
-      return response.json();
-    })  
-            .then((data) => {
-                console.log("Registration successful:", data);
-                alert("Registration successful! Please log in.");
-                navigate("/login");
-
-            })
-            .catch((error) => {
-                console.error("Registration error:", error);
-                alert("Registration failed. Please try again.");
+        setIsSubmitting(true);
+        try {
+            await signUp({
+                email: formData.email,
+                password: formData.password,
+                username: formData.username,
+                name: formData.name,
             });
+            window.alert("Registration successful! Please log in.");
+            navigate("/login");
+        } catch (authError) {
+            console.error("Registration error:", authError);
+            setError(authError.message || "Registration failed. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
       return (
@@ -77,6 +64,9 @@ function Register() {
               <div className="section-title">
                 <h2 id="auth-modal-title">Register</h2>
               </div>
+
+              {error && <div className="alert alert-danger" role="alert">{error}</div>}
+
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input
@@ -149,8 +139,9 @@ function Register() {
                 type="submit"
                 className="form-control"
                 id="cf-submit"
+                disabled={isSubmitting}
               >
-                Register
+                {isSubmitting ? "Registering..." : "Register"}
               </button>
             </form>
           </div>

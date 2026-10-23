@@ -1,12 +1,20 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function NavBar() {
-  const isLoggedIn = localStorage.getItem("access_token");
+  const { session, signOut } = useAuth();
   const navigate = useNavigate();
-  function handleLogout() {
-  localStorage.removeItem("access_token");
-  navigate("/");
+
+  async function handleLogout() {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   }
+
+  const isLoggedIn = Boolean(session);
   return (
          <section
             className="navbar navbar-default navbar-static-top"

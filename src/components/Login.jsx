@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 function Login() {
     const [formData, setFormData] = useState({
         email: "",  
         password: "",
     });
+    const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const navigate = useNavigate();
+    const { signIn } = useAuth();
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -16,44 +21,20 @@ function Login() {
         }));
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        fetch(
-    `${import.meta.env.VITE_SUPABASE_URL}/auth/v1/token?grant_type=password`,
-    {
-      method: "POST",
-      headers: {
-        apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-      }),
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(
-            error.error_description ||
-            error.msg ||
-            error.message ||
-            "Login failed"
-          );
-        });
-      }
+        setError("");
+        setIsSubmitting(true);
 
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Logged in user:", data);
-        localStorage.setItem("access_token", data.access_token);
+        try {
+          await signIn(formData.email, formData.password);
         navigate("/dashboard");
-    })
-    .catch((error) => {
-      console.error("Login error:", error);
-    });
+        } catch (authError) {
+          console.error("Login error:", authError);
+          setError(authError.message || "Login failed. Please try again.");
+        } finally {
+          setIsSubmitting(false);
+        }
     }
 
   return (
@@ -69,6 +50,8 @@ function Login() {
               <div className="section-title">
                 <h2 id="auth-modal-title">Login</h2>
               </div>
+
+              {error && <div className="alert alert-danger" role="alert">{error}</div>}
 
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -100,8 +83,9 @@ function Login() {
                     type="submit"
                     className="form-control"
                     id="cf-submit"
+                    disabled={isSubmitting}
               >
-                Login
+                {isSubmitting ? "Logging in..." : "Login"}
               </button>
             </form>
           </div>
