@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import $ from "jquery";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../bootstrap";
 import Header from "./header/Header";
@@ -15,29 +14,31 @@ import "./RegisterModal.css";
 
 function Home({ showRegister = false, showLogin = false }) {
   const navigate = useNavigate();
-  const authModalRef = useRef(null);
   const showAuthModal = showRegister || showLogin;
 
   useEffect(() => {
-    if (!authModalRef.current) {
-      return undefined;
+    if (!showAuthModal) {
+      return;
     }
 
-    const $modal = $(authModalRef.current);
-    function handleModalHidden() {
-      if (showAuthModal) {
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
         navigate("/");
       }
     }
 
-    $modal.on("hidden.bs.modal", handleModalHidden);
-    $modal.modal({ show: showAuthModal, backdrop: true, keyboard: true });
+    document.body.classList.add("modal-open");
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      $modal.off("hidden.bs.modal", handleModalHidden);
-      $modal.modal("hide");
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [navigate, showAuthModal]);
+
+  function closeAuthModal() {
+    navigate("/");
+  }
 
   return (
     <>
@@ -51,11 +52,22 @@ function Home({ showRegister = false, showLogin = false }) {
       {showAuthModal && (
         <>
           <div
-            ref={authModalRef}
-            className="modal fade auth-modal"
+            className="modal-backdrop fade in"
+            onClick={closeAuthModal}
+            aria-hidden="true"
+          />
+          <div
+            className="modal fade in auth-modal"
             role="dialog"
             aria-labelledby="auth-modal-title"
+            aria-modal="true"
             tabIndex="-1"
+            style={{ display: "block" }}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) {
+                closeAuthModal();
+              }
+            }}
           >
             <div className="modal-dialog">
               <div className="modal-content">
@@ -63,7 +75,7 @@ function Home({ showRegister = false, showLogin = false }) {
                   <button
                     type="button"
                     className="close"
-                    data-dismiss="modal"
+                    onClick={closeAuthModal}
                     aria-label={`Close ${showRegister ? "registration" : "login"}`}
                   >
                     &times;

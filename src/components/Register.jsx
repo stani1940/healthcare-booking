@@ -41,8 +41,7 @@ function Register() {
                 username: formData.username,
                 name: formData.name,
             });
-            window.alert("Registration successful! Please log in.");
-            navigate("/login");
+            navigate("/dashboard");
         } catch (authError) {
             console.error("Registration error:", authError);
             setError(authError.message || "Registration failed. Please try again.");

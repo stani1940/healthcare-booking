@@ -55,6 +55,11 @@ export function AuthProvider({ children }) {
       throw error;
     }
 
+    if (data.session) {
+      setSession(data.session);
+      localStorage.setItem("access_token", data.session.access_token);
+    }
+
     return data;
   }
 
