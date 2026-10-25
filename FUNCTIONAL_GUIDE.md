@@ -26,7 +26,7 @@ Registration, login, and logout use the Supabase JavaScript client and Supabase 
 
 ## 4. Routing Structure
 
-The app uses React Router with these routes. The dashboard, doctors, and appointments management routes are wrapped in a simple authentication check and redirect signed-out visitors to `/login`.
+The app uses React Router with these routes. A shared `SiteLayout` supplies the top bar, navigation, and footer to appointment, dashboard, doctor, and appointment-management pages. The dashboard, doctors, and appointments management routes are wrapped in a simple authentication check and redirect signed-out visitors to `/login`.
 
 | Route | Page |
 | --- | --- |
@@ -66,7 +66,7 @@ Supabase provides authentication and a PostgreSQL database through its client li
 
 ## 9. React-Specific Techniques
 
-The app uses `useState` for form and page state, `useEffect` for data loading and auth-state subscription, and `useNavigate` for navigation. It also implements Context API through `AuthContext` and `AuthProvider` to share authentication state and actions.
+The app uses `useState` for form and page state, `useEffect` for data loading and auth-state subscription, and `useNavigate` for navigation. It also implements Context API through `AuthContext` and `AuthProvider` to share authentication state and actions. Shared page structure is provided with a React layout component and nested routes.
 
 ## 10. Typical User Flow
 

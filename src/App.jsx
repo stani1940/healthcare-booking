@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard'
 import Team from './components/Team'
 import UserAppointments from './components/UserAppointments'  
 import ProtectedRoute from './components/ProtectedRoute'
+import SiteLayout from './components/SiteLayout'
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -14,34 +15,18 @@ function App() {
     <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/appointment" element={<Appointment />} />
             <Route path="/login" element={<Home showLogin />} />
             <Route path="/register" element={<Home showRegister />} />
-            <Route path="/add-doctor" element={
-              <ProtectedRoute>
-                <AddDoctor />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard/doctors" element={
-              <ProtectedRoute>
-                <Team />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard/appointments" element={
-              <ProtectedRoute>
-                <UserAppointments />
-              </ProtectedRoute>
-            } />
-            <Route path="/my-appointments" element={
-              <ProtectedRoute>
-                <UserAppointments />
-              </ProtectedRoute>
-            } />
+            <Route element={<SiteLayout />}>
+              <Route path="/appointment" element={<Appointment />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/add-doctor" element={<AddDoctor />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard/doctors" element={<Team />} />
+                <Route path="/dashboard/appointments" element={<UserAppointments />} />
+                <Route path="/my-appointments" element={<UserAppointments />} />
+              </Route>
+            </Route>
           </Routes>
     </AuthProvider>
   )
