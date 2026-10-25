@@ -6,9 +6,10 @@ function NavBar() {
   const navigate = useNavigate();
 
   async function handleLogout() {
+    navigate("/", { replace: true });
+
     try {
       await signOut();
-      navigate("/");
     } catch (error) {
       console.error("Logout error:", error);
     }
