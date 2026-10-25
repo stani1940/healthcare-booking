@@ -11,9 +11,9 @@ Healthcare Booking is a React single-page application for a healthcare center. V
 - Public pages include the home page, center information, doctors, news, contact information, and the appointment form.
 - Registration and login are available to visitors.
 - The appointment form requires a signed-in user when submitted.
-- The appointments page redirects to `/login` if there is no `access_token` in `localStorage`.
+- The dashboard, doctor management, and appointments routes require a signed-in session and redirect to `/login` otherwise.
 - The navigation displays links such as My Appointments and Add Doctor when a session exists.
-- The router does not currently protect `/dashboard`, `/dashboard/doctors`, or `/add-doctor`. Hiding navigation links is not route-level access control. Actual data permissions depend on the Supabase policies configured for the project.
+- These routes require authentication but do not check for a particular user role. Actual data permissions still depend on the Supabase policies configured for the project.
 
 ## 3. Authentication & Session Handling
 
@@ -26,7 +26,7 @@ Registration, login, and logout use the Supabase JavaScript client and Supabase 
 
 ## 4. Routing Structure
 
-The app uses React Router with these routes:
+The app uses React Router with these routes. The dashboard, doctors, and appointments management routes are wrapped in a simple authentication check and redirect signed-out visitors to `/login`.
 
 | Route | Page |
 | --- | --- |
@@ -40,7 +40,7 @@ The app uses React Router with these routes:
 | `/dashboard/appointments` | Appointments management |
 | `/my-appointments` | Appointments management |
 
-There is no route-level authentication or role guard at present.
+The route check requires a signed-in user; role-based access is not implemented.
 
 ## 5. List → Details Flow
 

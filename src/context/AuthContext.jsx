@@ -5,12 +5,14 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, currentSession) => {
       setSession(currentSession);
+      setIsLoading(false);
 
       if (currentSession?.access_token) {
         localStorage.setItem("access_token", currentSession.access_token);
@@ -72,6 +74,7 @@ export function AuthProvider({ children }) {
       value={{
         session,
         user: session?.user ?? null,
+        isLoading,
         signIn,
         signUp,
         signOut,
