@@ -113,14 +113,6 @@ function NavBar() {
             </>
           )}
 
-            {isLoggedIn && (
-              <li className="appointment-btn">
-                <NavLink to="/add-doctor">
-                  Add Doctor
-                </NavLink>
-              </li>
-            )}
-           
           </ul>
         </div>
 

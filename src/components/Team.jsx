@@ -1,9 +1,13 @@
 import DoctorCard from "./DoctorCard";
 import { useEffect , useState} from "react";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 function Team() {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { session } = useAuth();
 
 
   useEffect(() => {
@@ -39,6 +43,14 @@ function Team() {
               </h2>
             </div>
           </div>
+
+          {session && (
+            <div className="col-md-6 col-sm-6 text-right">
+              <NavLink to="/add-doctor" className="btn btn-success">
+                Add Doctor
+              </NavLink>
+            </div>
+          )}
 
           <div className="clearfix"></div>
           {loading && <p>Loading doctors...</p>}
