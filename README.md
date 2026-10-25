@@ -10,3 +10,29 @@ A web application for a healthcare center, built with React and Supabase.
 - **Supabase Authentication API:** [https://svykhgeiwydrpxykxwqc.supabase.co/auth/v1](https://svykhgeiwydrpxykxwqc.supabase.co/auth/v1)
 
 The frontend is deployed on Vercel. The backend is hosted on Supabase and provides authentication and database access through its REST API.
+
+## Local Development
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (which includes npm)
+
+### Install and run
+
+1. Clone the repository and open the project directory:
+
+   Command in terminal:
+   git clone https://github.com/stani1940/healthcare-booking.git
+   cd healthcare-booking
+
+2. Install the dependencies:
+
+   Command in terminal:
+   npm install
+
+3. Start the development server:
+
+   Command in terminal:
+   npm run dev
+
+4. Open the local URL printed in the terminal (Vite typically uses `http://localhost:5173`).
