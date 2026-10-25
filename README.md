@@ -1,16 +1,12 @@
-# React + Vite
+# Healthcare Booking
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application for a healthcare center, built with React and Supabase.
 
-Currently, two official plugins are available:
+## Deployment Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend (React + Vite, Vercel):** [https://healthcare-booking-gamma.vercel.app/](https://healthcare-booking-gamma.vercel.app/)
+- **Backend (Supabase):** [https://svykhgeiwydrpxykxwqc.supabase.co](https://svykhgeiwydrpxykxwqc.supabase.co/)
+- **Supabase REST API:** [https://svykhgeiwydrpxykxwqc.supabase.co/rest/v1](https://svykhgeiwydrpxykxwqc.supabase.co/rest/v1)
+- **Supabase Authentication API:** [https://svykhgeiwydrpxykxwqc.supabase.co/auth/v1](https://svykhgeiwydrpxykxwqc.supabase.co/auth/v1)
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The frontend is deployed on Vercel. The backend is hosted on Supabase and provides authentication and database access through its REST API.
