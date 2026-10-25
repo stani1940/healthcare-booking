@@ -72,6 +72,19 @@ function Appointment() {
     }));
   }
 
+  function handleTimeChange(date) {
+    const formattedTime = date
+      ? `${String(date.getHours()).padStart(2, "0")}:${String(
+          date.getMinutes()
+        ).padStart(2, "0")}`
+      : "";
+
+    setFormData((previousData) => ({
+      ...previousData,
+      time: formattedTime
+    }));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     setError("");
@@ -179,6 +192,7 @@ function Appointment() {
             <form 
                 id="appointment-form" 
                 role="form"
+                autoComplete="off"
                 onSubmit={handleSubmit}>
               <div className="section-title wow fadeInUp" data-wow-delay="0.4s">
                 <h2>Make an appointment</h2>
@@ -192,6 +206,7 @@ function Appointment() {
                     className="form-control"
                     id="name"
                     name="name"
+                    autoComplete="off"
                     placeholder="Full Name"
                     value={formData.name}
                     onChange={handleChange}
@@ -205,6 +220,7 @@ function Appointment() {
                     className="form-control"
                     id="email"
                     name="email"
+                    autoComplete="off"
                     placeholder="Your Email"
                     value={formData.email}
                     onChange={handleChange}
@@ -216,6 +232,7 @@ function Appointment() {
                   <DatePicker
                     className="form-control"
                     id="date"
+                    autoComplete="off"
                     dateFormat="yyyy-MM-dd"
                     selected={
                       formData.date
@@ -228,13 +245,22 @@ function Appointment() {
 
                 <div className="col-md-6 col-sm-6">
                   <label htmlFor="time">Select Time</label>
-                  <input
+                  <DatePicker
                     id="time"
                     className="form-control"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}      
-                  />              
+                    autoComplete="off"
+                    selected={
+                      formData.time
+                        ? new Date(`2000-01-01T${formData.time}:00`)
+                        : null
+                    }
+                    onChange={handleTimeChange}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={30}
+                    timeCaption="Time"
+                    dateFormat="HH:mm"
+                  />
                 </div>
 
                 <div className="col-md-12 col-sm-12">
@@ -244,6 +270,7 @@ function Appointment() {
                     className="form-control"
                     name="doctorId"
                     id="doctorId"
+                    autoComplete="off"
                     value={formData.doctorId}
                     onChange={handleChange}
                     disabled={loadingDoctors}
@@ -269,6 +296,7 @@ function Appointment() {
                     className="form-control"
                     id="telephone"
                     name="telephone"
+                    autoComplete="off"
                     placeholder="Phone"
                     value={formData.telephone}
                     onChange={handleChange}
@@ -282,6 +310,7 @@ function Appointment() {
                     rows="5"
                     id="message"
                     name="message"
+                    autoComplete="off"
                     placeholder="Message"
                     value={formData.message}
                     onChange={handleChange}

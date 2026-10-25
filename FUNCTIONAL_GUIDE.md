@@ -60,8 +60,8 @@ Supabase provides authentication and a PostgreSQL database through its client li
 
 - **Register:** Checks that password and confirmation match. Email uses an email input; authentication errors are displayed.
 - **Login:** Uses email and password inputs; authentication errors are displayed.
-- **Appointment:** Loads doctors for selection and requires a signed-in user on submission. The form does not currently perform explicit client-side required-field validation for doctor, date, or time.
-- **Edit Appointment:** Explicitly checks that a doctor, date, and time are selected before updating. Notes are optional.
+- **Appointment:** Loads doctors for selection and requires a signed-in user on submission. Users select the appointment date with a date picker and the time with a time picker in 30-minute intervals. The form does not currently perform explicit client-side required-field validation for doctor, date, or time.
+- **Edit Appointment:** Uses date and time pickers, with time choices in 30-minute intervals. It explicitly checks that a doctor, date, and time are selected before updating. Notes are optional.
 - **Add Doctor:** Collects name, specialty, phone, email, and image path. There is no explicit client-side validation or visible error message when the request fails.
 
 ## 9. React-Specific Techniques
